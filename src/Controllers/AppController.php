@@ -10,5 +10,4 @@ final class AppController
     {
         return require_once __DIR__ . '/../../public/views/app.html';
     }
-
 }

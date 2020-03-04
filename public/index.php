@@ -1,33 +1,14 @@
 <?php
 
-# autoloader
-require __DIR__.'/../vendor/autoload.php';
+# error handler
+try {
+    # autoloader
+    require __DIR__ . '/../vendor/autoload.php';
+    # routes
+    require_once __DIR__ . '/../src/config/routes.php';
+} catch (\Throwable $t) {
+    # maybe I need a class that will build the message for exceptions
 
-
-echo "start";
-echo "<pre>";
-var_dump($_SERVER['REQUEST_URI']);
-echo "</pre>";
-
-# method
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
-    if ($_SERVER['REQUEST_URI'] == '/') {
-        #render the page
-
-        $app = new \App\Controllers\AppController();
-
-        echo $app();
-    }
+    echo $t->getMessage();
+    echo 'Internal Server error';
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-}
-if ($_SERVER['REQUEST_METHOD'] === 'UPDATE') {
-
-}
-
-# need a route for view
-
-# to define route
-#$_SERVER['REQUEST_URI']
