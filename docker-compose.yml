@@ -1,0 +1,19 @@
+version: '2'
+services:
+    bca-api-nginx:
+        build:
+            context: ./
+            dockerfile: docker/nginx.docker
+        volumes:
+          - ./:/var/www
+        command: [nginx-debug, '-g', 'daemon off;']
+        ports:
+          - "90:80"
+        links:
+          - bca-api-php-fpm
+    bca-api-php-fpm:
+        build:
+            context: ./
+            dockerfile: docker/php-fpm.docker
+        volumes:
+          - ./:/var/www

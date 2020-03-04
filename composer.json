@@ -1,0 +1,21 @@
+{
+    "name": "dmytruk/bca_test",
+    "description": "test task",
+    "authors": [
+        {
+            "name": "Vitalii Dmytruk",
+            "email": "vitaly.dmitruk@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
