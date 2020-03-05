@@ -1,5 +1,10 @@
 #Test task for BCA
 
+#Composer
+
+In this project composer is used only for autoload and PHPUnit. The autoload could be done with spl_autoload_register()
+but I find it nicer to use the PSR-4 autoload.
+
 # index.php
 
 I like to keep the entry point clean, so I moved routes to a dedicated file in config

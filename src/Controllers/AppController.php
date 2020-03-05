@@ -8,6 +8,9 @@ final class AppController
 {
     public function __invoke()
     {
+
+        header('Content-Type: text/html');
+
         return require_once __DIR__ . '/../../public/views/app.html';
     }
 }

@@ -11,6 +11,6 @@ final class DeleteClientController extends ApiController
     public function __invoke()
     {
         $response = [];
-        $this->responseWithJson($response);
+        $this->responseWithJson($response, 204);
     }
 }
