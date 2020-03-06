@@ -9,9 +9,17 @@ but I find it nicer to use the PSR-4 autoload.
 
 I like to keep the entry point clean, so I moved routes to a dedicated file in config
 
+#Router
+To simplify the code and because it is a test routes do not support uris like 'api/v1/client/{1}', all parameters 
+should be send as regular query parameters 
+
 #Controllers
 I use invokable controllers - they have only one function: link request, business logic and response.
 Each controller has only one responsibility.
+
+#DTO
+DTO allows us decouple database structure from the response. Should we change any parameters in payload it will be done 
+easily in DTO without touching db schema.
 
 #Persistence layer
 

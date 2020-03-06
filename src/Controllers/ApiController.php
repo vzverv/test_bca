@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use JsonSerializable;
+
 abstract class ApiController
 {
     /**
@@ -20,7 +22,12 @@ abstract class ApiController
 
         header('Content-Type: application/json');
         http_response_code($code);
-        # add a header?
         echo $encoded;
+    }
+
+    protected function responseNoContent()
+    {
+        header($_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.1' . ' ' . 'No Content');
+        http_response_code(204);
     }
 }

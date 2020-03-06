@@ -12,7 +12,7 @@ namespace App\Domain\Client;
  */
 interface ClientRepositoryInterface
 {
-    public function createClient(array $data): bool;
+    public function createClient(array $data): int;
     public function deleteClient(int $id): bool;
     public function emailRegistered(string $email): bool;
 }

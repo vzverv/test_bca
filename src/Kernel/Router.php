@@ -45,6 +45,15 @@ final class Router
     }
 
     /**
+     * @param string $uri
+     * @param callable $invokable
+     */
+    final public function delete(string $uri, callable $invokable)
+    {
+        $this->addRoute('DELETE', $uri, $invokable);
+    }
+
+    /**
      * @param string $method
      * @param string $uri
      * @param callable $invokable
