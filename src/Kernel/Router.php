@@ -21,7 +21,9 @@ final class Router
         $requestBody = file_get_contents('php://input');
         $body = json_decode($requestBody, true);
 
-        $_REQUEST = $body['params'] ?? [];
+        if (empty($_REQUEST)) {
+            $_REQUEST = $body['params'] ?? [];
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && $body['_method'] === 'delete') {
             $_SERVER['REQUEST_METHOD'] = 'DELETE';
