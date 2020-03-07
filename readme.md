@@ -1,9 +1,12 @@
-#Test task for BCA
+# Test task for BCA
 
 # Bootstrap
-Do *composer install* to have autoload and install PHPUnit with a nice printer
-then do *docker-compose up -d* to run the site via docker
-to run tests from outside of container *docker exec bca_bca-api-php-fpm_1 vendor/bin/phpunit* or
+
+- Do *composer install* to have autoload and install PHPUnit with a nice printer
+
+- then do *docker-compose up -d* to run the site via docker
+
+- to run tests from outside of container *docker exec bca_bca-api-php-fpm_1 vendor/bin/phpunit* or
 go inside of container *docker exec -ti {container id/container name} bash* and run *vendor/bin/phpunit*
 
 # IMPORTANT
@@ -37,6 +40,9 @@ easily in DTO without touching db schema.
 I separate read and write models to respect CQRS principle.
 Write models should be accessed via a service from the app layer (UseCase), at the same time the read model usually 
 doesn't need to process data - it simply retrieves it from the data storage. 
+
+# Tests
+I did only API (Feature) test to confirm expected behavior. 
 
 # Because it is a test task I skipped some moments: 
 - I do not implement PSR7 interfaces
