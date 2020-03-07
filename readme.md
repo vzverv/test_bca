@@ -1,10 +1,12 @@
 #Test task for BCA
 
 # Bootstrap
-
+Do *composer install* to have autoload and install PHPUnit with a nice printer
+then do *docker-compose up -d* to run the site via docker
+to run tests from outside of container *docker exec bca_bca-api-php-fpm_1 vendor/bin/phpunit* or
+go inside of container *docker exec -ti {container id/container name} bash* and run *vendor/bin/phpunit*
 
 #Composer
-
 In this project composer is used only for autoload and PHPUnit. The autoload could be done with spl_autoload_register()
 but I find it nicer to use the PSR-4 autoload.
 
@@ -32,3 +34,4 @@ doesn't need to process data - it simply retrieves it from the data storage.
 
 #Because it is a test task I skipped some moments: 
 - I do not implement PSR7 interfaces
+- I didn't create an entity Client
