@@ -13,5 +13,6 @@ CREATE TABLE "client"
 	investment_time TEXT,
 	expected_purchase_date TEXT,
 	status INTEGER,
-	comments TEXT
+	comments TEXT,
+	receive_emails INTEGER
 )

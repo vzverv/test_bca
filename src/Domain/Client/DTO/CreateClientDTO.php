@@ -39,6 +39,7 @@ final class CreateClientDTO implements \JsonSerializable
             'asset_class',
             'investment_time',
             'expected_purchase_date',
+            'receive_emails',
         ];
 
         foreach ($requiredFields as $fieldName) {
@@ -75,6 +76,7 @@ final class CreateClientDTO implements \JsonSerializable
             'investment_time' => $this->data['investment_time'],
             'expected_purchase_date' => $this->data['expected_purchase_date'], # Y-m-d
             'comments' => $this->data['comments'] ?? '',
+            'receive_emails' => $this->data['receive_emails'] ?? 1, # by default send emails
         ];
     }
 }

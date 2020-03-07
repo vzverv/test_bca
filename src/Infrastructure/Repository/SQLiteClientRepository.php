@@ -22,9 +22,9 @@ final class SQLiteClientRepository implements ClientRepositoryInterface
     public function createClient(array $data): int
     {
         $query = "INSERT INTO client                    
-                   (salutation, first_name, last_name,email, country, zip_code, asset_class, investment_time, expected_purchase_date, status, comments)                   
+                   (salutation, first_name, last_name,email, country, zip_code, asset_class, investment_time, expected_purchase_date, status, comments, receive_emails)                   
                    VALUES
-                   (:salutation, :first_name, :last_name, :email, :country, :zip_code, :asset_class, :investment_time, :expected_purchase_date, :status, :comments)                    
+                   (:salutation, :first_name, :last_name, :email, :country, :zip_code, :asset_class, :investment_time, :expected_purchase_date, :status, :comments, :receive_emails)                    
                    ";
         $statement = $this->connection->prepare($query);
         $statement->bindValue(':salutation', $data['salutation']);
@@ -38,6 +38,7 @@ final class SQLiteClientRepository implements ClientRepositoryInterface
         $statement->bindValue(':expected_purchase_date', $data['expected_purchase_date']);
         $statement->bindValue(':status', 1); // active, default status, could be a constant in the Client entity
         $statement->bindValue(':comments', $data['comments']);
+        $statement->bindValue(':receive_emails', $data['receive_emails']);
 
         $statement->execute();
 

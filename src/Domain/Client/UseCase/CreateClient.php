@@ -23,6 +23,8 @@ final class CreateClient
             throw new \InvalidArgumentException('Email already exists.');
         }
 
+        $data['country'] = $this->resolveCountry($data['country']);
+
         # validate allowed values for salutation etc
         $this->checkBusinessRules($data);
 
@@ -80,7 +82,7 @@ final class CreateClient
     private function usaZipCode(string $country, $zipCode)
     {
         #Zip Code is required for USA and should only accept digits
-        if ($country === 'USA') {
+        if ($country === 'United States (USA)') {
             if (empty($zipCode)) {
                 throw new \InvalidArgumentException('Zip code is required for United States');
             }
@@ -115,5 +117,35 @@ final class CreateClient
         if (strlen($comments) > 500) {
             throw new \InvalidArgumentException('The comment can be max 500 symbols');
         }
+    }
+
+    private function resolveCountry($country)
+    {
+        $countriesByName = [
+            'United States' => 'United States (USA)',
+            'Canada' => 'Canada (CAN)',
+            'United Kingdom' => 'United Kingdom (GBR)',
+            'India' => 'India (IND)',
+            'Cuba' => 'Cuba (CUB)',
+        ];
+
+        $countriesByCode = [
+            'USA' => 'United States (USA)',
+            'CAN' => 'Canada (CAN)',
+            'GBR' => 'United Kingdom (GBR)',
+            'IND' => 'India (IND)',
+            'CUB' => 'Cuba (CUB)',
+        ];
+
+        $countriesWithCode = array_values($countriesByName);
+
+        $countryWithCode = isset($countriesByName[$country]) ? $countriesByName[$country] : $country;
+
+        # if didn't pick the value from countries by name let's try in countries by code
+        if (!in_array($countryWithCode, $countriesWithCode)){
+            $countryWithCode = isset($countriesByCode[$country]) ? $countriesByCode[$country] : $country;
+        }
+
+        return $countryWithCode;
     }
 }

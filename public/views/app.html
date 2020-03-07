@@ -38,7 +38,7 @@
                             <input class="text" type="text" name="last_name" placeholder="Last Name" required="">
                             <input class="text email" type="email" name="email" placeholder="Email" required="" style="margin-top: 0px; margin-bottom: 0px;">
                             <input class="text" type="text" name="country" placeholder="Country" required="">
-                            <input class="text" type="text" name="zip_code" placeholder="Zip Code">
+                            <input class="text" type="text" name="zip_code" placeholder="Zip Code"  value="Zip Code">
                             <div class="wthree-text">
                                 <label class="anim">
                                     <input name="receive_emails" type="checkbox" class="checkbox" required="">
@@ -155,8 +155,13 @@
         let zipCode = document.getElementsByName("zip_code")[0].value;
         let country = document.getElementsByName("country")[0].value;
 
+        if (zipCode == 'Zip Code') {
+            zipCode = '';
+        }
+
         if ((country == 'United States' || country == 'USA') && zipCode.length == 0) {
             alert('Zip Code is required for USA');
+            return;
         }
 
         let client = {
