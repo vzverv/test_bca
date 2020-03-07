@@ -38,7 +38,7 @@ final class ClientTest extends BaseApiTestCase
                     'asset_class' => 'Large',
                     'investment_time' => 'Short',
                     'expected_purchase_date' => '2030-01-06', # Y-m-d
-                    'comments' => '' # Y-m-d
+                    'comments' => '', # Y-m-d
                 ]
             ]
         ];
@@ -77,6 +77,7 @@ final class ClientTest extends BaseApiTestCase
             'investment_time' => 'Short',
             'expected_purchase_date' => '2030-01-06', # Y-m-d
             'comments' => 'comments',
+            'receive_emails' => 1,
         ];
 
         $this->apiCall('POST', '/api/v1/client');
@@ -101,6 +102,7 @@ final class ClientTest extends BaseApiTestCase
             'investment_time' => 'Short',
             'expected_purchase_date' => '2030-01-06', # Y-m-d
             'comments' => 'comments',
+            'receive_emails' => 1,
         ];
 
         $response = $this->apiCall('POST', '/api/v1/client');
@@ -127,6 +129,7 @@ final class ClientTest extends BaseApiTestCase
             'investment_time' => 'Short',
             'expected_purchase_date' => '2030-01-06', # Y-m-d
             'comments' => 'comments',
+            'receive_emails' => 1,
         ];
 
         $response = $this->apiCall('POST', '/api/v1/client');
@@ -153,6 +156,7 @@ final class ClientTest extends BaseApiTestCase
             'investment_time' => 'Short',
             'expected_purchase_date' => '2030-01-06', # Y-m-d
             'comments' => 'comments',
+            'receive_emails' => 1,
         ];
 
         $response = $this->apiCall('POST', '/api/v1/client');
@@ -179,6 +183,7 @@ final class ClientTest extends BaseApiTestCase
             'asset_class' => 'Large',
             'investment_time' => 'Short',
             'expected_purchase_date' => '2030-01-06', # Y-m-d
+            'receive_emails' => 1,
         ];
 
         $this->apiCall('POST', '/api/v1/client');
@@ -202,6 +207,7 @@ final class ClientTest extends BaseApiTestCase
             'asset_class' => 'Large',
             'investment_time' => 'Short',
             'expected_purchase_date' => '2030-01-06', # Y-m-d
+            'receive_emails' => 1,
         ];
 
         $this->apiCall('POST', '/api/v1/client');
@@ -227,6 +233,7 @@ final class ClientTest extends BaseApiTestCase
             'investment_time' => 'Short',
             'expected_purchase_date' => '2030-01-06', # Y-m-d
             'comments' => 'comments',
+            'receive_emails' => 1,
         ];
 
         $response = $this->apiCall('POST', '/api/v1/client');
@@ -254,6 +261,7 @@ final class ClientTest extends BaseApiTestCase
             'investment_time' => 'Short',
             'expected_purchase_date' => '2030-01-06', # Y-m-d
             'comments' => 'comments',
+            'receive_emails' => 1,
         ];
 
         $response = $this->apiCall('POST', '/api/v1/client');
@@ -281,6 +289,7 @@ final class ClientTest extends BaseApiTestCase
             'investment_time' => 'Short',
             'expected_purchase_date' => '2030-01-06', # Y-m-d
             'comments' => 'comments',
+            'receive_emails' => 1,
         ];
 
         $response = $this->apiCall('POST', '/api/v1/client');
@@ -308,6 +317,7 @@ final class ClientTest extends BaseApiTestCase
             'investment_time' => 'Short',
             'expected_purchase_date' => '2030-01-06', # Y-m-d
             'comments' => 'comments',
+            'receive_emails' => 1,
         ];
 
         $response = $this->apiCall('POST', '/api/v1/client');
@@ -335,11 +345,39 @@ final class ClientTest extends BaseApiTestCase
             'investment_time' => 'Short',
             'expected_purchase_date' => '2020-01-06', # Y-m-d
             'comments' => 'comments',
+            'receive_emails' => 1,
         ];
 
         $response = $this->apiCall('POST', '/api/v1/client');
 
         $this->assertEquals('The expected purchase date must be in future.', $response);
+
+        $responseCode = http_response_code();
+
+        $this->assertEquals(400, $responseCode);
+    }
+
+    /**
+     * @test
+     */
+    public function create_client_validation_fail_usa_zip_code_required()
+    {
+        $_REQUEST = [
+            'salutation' => 'Mr.',
+            'first_name' => 'Dima',
+            'last_name' => 'Pupkin',
+            'email' => 'pupking22eg' . rand(50, 6000) .'@hdmail.ua',
+            'country' => 'USA',
+            'asset_class' => 'Large',
+            'investment_time' => 'Short',
+            'expected_purchase_date' => '2020-01-06', # Y-m-d
+            'comments' => 'comments',
+            'receive_emails' => 1,
+        ];
+
+        $response = $this->apiCall('POST', '/api/v1/client');
+
+        $this->assertEquals('Zip code is required for United States', $response);
 
         $responseCode = http_response_code();
 
@@ -368,6 +406,7 @@ final class ClientTest extends BaseApiTestCase
             dasfdsfkdjl commentcommentcommentcommentcommentcomment commentcommentcommentcommentcommentcomment dsfd 
             commentcommentcommentcommentcommentcomment commentcommentcommentcommentcommentcomment kjdsh kjsdk dskj sd
             commentcommentcommentcommentcommentcomment commentcommentcommentcommentcommentcomment adfdsfsdfsd',
+            'receive_emails' => 1,
         ];
 
         $response = $this->apiCall('POST', '/api/v1/client');
