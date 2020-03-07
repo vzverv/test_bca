@@ -37,7 +37,8 @@ final class ClientTest extends BaseApiTestCase
                     'zip_code' => 'H4V 2V5',
                     'asset_class' => 'Large',
                     'investment_time' => 'Short',
-                    'expected_purchase_date' => '2030-01-06' # Y-m-d
+                    'expected_purchase_date' => '2030-01-06', # Y-m-d
+                    'comments' => '' # Y-m-d
                 ]
             ]
         ];

@@ -1,5 +1,8 @@
 #Test task for BCA
 
+# Bootstrap
+
+
 #Composer
 
 In this project composer is used only for autoload and PHPUnit. The autoload could be done with spl_autoload_register()

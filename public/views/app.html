@@ -1,10 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>BCA test</title>
+    <title>BCA client</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!-- Custom Theme files -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <!-- //Custom Theme files -->
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- //web font -->
 </head>
-<body>
- Hello BCA!
+<body onload="loadClients()">
+<!-- main -->
+<div class="container" style="margin-left: 10px;">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="main-w3layouts wrapper" style="padding-top: 8px; padding-bottom: 16px;">
+                <h1>Add Client</h1>
+                <div class="main-agileinfo" style="margin-top: 0px; margin-bottom: 5px; padding-left: 5px;">
+                        <form on onsubmit="event.preventDefault(); createClient()" action="#" method="post">
+                            <hr class="style1">
+                            <h2 style="color: white; padding-left: 5%;">Client Information</h2>
+                            <hr class="style1" style="margin-top: 10px;">
+
+                            <input class="text" type="text" name="salutation" placeholder="Salutation" required="">
+                            <input class="text" type="text" name="first_name" placeholder="First Name" required="">
+                            <input class="text" type="text" name="last_name" placeholder="Last Name" required="">
+                            <input class="text email" type="email" name="email" placeholder="Email" required="" style="margin-top: 0px; margin-bottom: 0px;">
+                            <input class="text" type="text" name="country" placeholder="Country" required="">
+                            <input class="text" type="text" name="zip_code" placeholder="Zip Code">
+                            <div class="wthree-text">
+                                <label class="anim">
+                                    <input name="receive_emails" type="checkbox" class="checkbox" required="">
+                                    <span>Receive e-mails</span>
+                                </label>
+                                <div class="clear"></div>
+                            </div>
+                            <hr class="style1">
+                            <h2 style="color: white; padding-left: 5%;">Research Preference</h2>
+                            <hr class="style1">
+                            <fieldset class="form-group">
+                                <div class="row">
+                                    <legend class="col-form-label col-sm-2 pt-0" style="color: white;">Asset Class</legend>
+                                    <div class="col-sm-10">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="asset_class" id="asset-small" value="Small" checked>
+                                            <label class="form-check-label" for="asset-small">Small</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="asset_class" id="asset-mid" value="Mid">
+                                            <label class="form-check-label" for="asset-mid">Mid</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="asset_class" id="asset-large" value="Large">
+                                            <label class="form-check-label" for="asset-large">Large</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <label for="expected_purchase_date" style="color: white;">Expected Purchase Date</label>
+                            <input id="expected_purchase_date" class="text" type="date" name="expected_purchase_date" required="" style="background-color: #76b852; color: white; width: 94%;">
+
+                            <label for="investment_time" style="color: white;">Investment Time</label>
+                            <select id="investment_time" name="investment_time" style="width: 94%;color: white;background-color: #76b852;">
+                                <option value="Short">Short (< 3 months)</option>
+                                <option value="Medium">Medium (< 2 years)</option>
+                                <option value="Long">Long (> 2 years)</option>
+                            </select>
+
+                            <div class="form-group">
+                                <textarea class="text" rows="3" name="comments" placeholder="Write your comments here" style="background-color: #76b852; width: 94%;"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6" style="padding-right: 0px"><input type="submit" value="Add" style="width: 95%; margin-bottom: 7px;margin-top: 0px;"></div>
+                                <div class="col-md-6"  style=" padding-left: 0px;"> <input type="reset" value="Reset" style="width: 95%; margin-bottom: 7px;margin-top: 0px;"> </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <h1> All Clients</h1>
+                    <table  id="t-clients" class="table table-stripped">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Salutation</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Country</th>
+                                <th scope="col">Zip Code</th>
+                                <th scope="col">Asset Class</th>
+                                <th scope="col">Investment Time</th>
+                                <th scope="col">Expected Purchase Date</th>
+                                <th scope="col">Comments</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- //main -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    function loadClients(clearTable = false) {
+
+        if(clearTable === true) {
+            let tableRef = document.getElementById("t-clients").getElementsByTagName('tbody')[0];
+            tableRef.innerHTML = "";
+        }
+
+        axios.get('/api/v1/clients').then(response => {
+            let clients = response.data.clients;
+
+            let tableRef = document.getElementById("t-clients").getElementsByTagName('tbody')[0];
+
+            for (client of clients) {
+                let newRow = tableRef.insertRow(tableRef.rows.length);
+                newRow.innerHTML = "<th scope=\"row\">" + client.id +"</th>\n" +
+                            "<td>"+ client.salutation +"</td>" +
+                            "<td>" + client.first_name + "</td>" +
+                            "<td>" + client.last_name + "</td>" +
+                            "<td>" + client.email + "</td>" +
+                            "<td>" + client.country + "</td>" +
+                            "<td>" + client.zip_code + "</td>" +
+                            "<td>" + client.asset_class + "</td>" +
+                            "<td>" + client.investment_time + "</td>" +
+                            "<td>" + client.expected_purchase_date +"</td>" +
+                            "<td>" + client.comments + "</td>" +
+                            "<td><button id='" + client.id + "' onclick='deleteClient(this.id)' style=\"background-color: black; color: white\">X</button></td>";
+            }
+        }).catch(error => {});
+    }
+
+    function createClient() {
+
+        let zipCode = document.getElementsByName("zip_code")[0].value;
+        let country = document.getElementsByName("country")[0].value;
+
+        if ((country == 'United States' || country == 'USA') && zipCode.length == 0) {
+            alert('Zip Code is required for USA');
+        }
+
+        let client = {
+            'salutation': document.getElementsByName("salutation")[0].value,
+            'first_name': document.getElementsByName("first_name")[0].value,
+            'last_name': document.getElementsByName("last_name")[0].value,
+            'email': document.getElementsByName("email")[0].value,
+            'country': country,
+            'zip_code': zipCode,
+            'asset_class': document.getElementsByName("asset_class")[0].value,
+            'investment_time': document.getElementsByName("investment_time")[0].value,
+            'expected_purchase_date': document.getElementsByName("expected_purchase_date")[0].value,
+            'comments': document.getElementsByName("comments")[0].value,
+            'receive_emails': +(document.getElementsByName("receive_emails")[0].value == 'on'),
+        };
+
+        console.log('post', client);
+
+        axios.post('/api/v1/client', client, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            loadClients(true);
+        }).catch( error => {
+            console.error('error', error);
+            alert(error.response.data);
+        });
+    }
+
+    function deleteClient(id) {
+
+        let data = {'id': id};
+
+        axios.post('/api/v1/client', {
+            params: data,
+            _method: 'delete',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            console.log('delete');
+            loadClients(true);
+        }).catch(error => {
+            console.error('error', error);
+            alert(error.response.data);
+        });
+    }
+
+</script>
 </body>
 </html>

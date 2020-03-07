@@ -39,7 +39,8 @@ final class RetrieveClientsDTO implements \JsonSerializable
                 'zip_code' => $client['zip_code'] ?? '',
                 'asset_class' => $client['asset_class'] ?? '',
                 'investment_time' => $client['investment_time'] ?? '',
-                'expected_purchase_date' => $client['expected_purchase_date'] ?? '' # Y-m-d
+                'expected_purchase_date' => $client['expected_purchase_date'] ?? '', # Y-m-d
+                'comments' => $client['comments'] ?? ''
             ];
         }
 

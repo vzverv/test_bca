@@ -14,7 +14,13 @@ final class CreateClientController extends ApiController
      */
     public function __invoke()
     {
-        $dto = new CreateClientDTO($_REQUEST);
+        $body = file_get_contents('php://input');
+
+        $inputData = json_decode($body, true);
+
+        $inputData = $inputData ?? $_REQUEST;
+
+        $dto = new CreateClientDTO($inputData ?? []);
 
         $createClient = new CreateClient();
 

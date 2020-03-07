@@ -18,6 +18,15 @@ final class Router
     {
         $uri = explode('?', $_SERVER['REQUEST_URI']);
 
+        $requestBody = file_get_contents('php://input');
+        $body = json_decode($requestBody, true);
+
+        $_REQUEST = $body['params'] ?? [];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $body['_method'] === 'delete') {
+            $_SERVER['REQUEST_METHOD'] = 'DELETE';
+        }
+
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $v) {
 
             if (isset($uri[0]) && ($uri[0] === $v['uri'])) {

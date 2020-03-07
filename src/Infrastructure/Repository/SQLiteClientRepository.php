@@ -22,9 +22,9 @@ final class SQLiteClientRepository implements ClientRepositoryInterface
     public function createClient(array $data): int
     {
         $query = "INSERT INTO client                    
-                   (salutation, first_name, last_name,email, country, zip_code, asset_class, investment_time, expected_purchase_date, comments)                   
+                   (salutation, first_name, last_name,email, country, zip_code, asset_class, investment_time, expected_purchase_date, status, comments)                   
                    VALUES
-                   (:salutation, :first_name, :last_name, :email, :country, :zip_code, :asset_class, :investment_time, :expected_purchase_date, :comments)                    
+                   (:salutation, :first_name, :last_name, :email, :country, :zip_code, :asset_class, :investment_time, :expected_purchase_date, :status, :comments)                    
                    ";
         $statement = $this->connection->prepare($query);
         $statement->bindValue(':salutation', $data['salutation']);
@@ -36,6 +36,7 @@ final class SQLiteClientRepository implements ClientRepositoryInterface
         $statement->bindValue(':asset_class', $data['asset_class']);
         $statement->bindValue(':investment_time', $data['investment_time']);
         $statement->bindValue(':expected_purchase_date', $data['expected_purchase_date']);
+        $statement->bindValue(':status', 1); // active, default status, could be a constant in the Client entity
         $statement->bindValue(':comments', $data['comments']);
 
         $statement->execute();
@@ -51,7 +52,7 @@ final class SQLiteClientRepository implements ClientRepositoryInterface
      */
     public function deleteClient(int $id): bool
     {
-        $query = 'DELETE FROM client WHERE id = :id';
+        $query = 'UPDATE client SET status = 0 WHERE id = :id';
 
         $statement = $this->connection->prepare($query);
         $statement->bindValue(':id', $id);

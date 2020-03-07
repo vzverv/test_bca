@@ -14,7 +14,7 @@ final class RetrieveClientsController extends ApiController
     {
         $readModel = new SQLiteClientReadModel();
 
-        $data = $readModel->retrieveAllClients();
+        $data = $readModel->retrieveActiveClients();
 
         $dto = new RetrieveClientsDTO($data);
 
